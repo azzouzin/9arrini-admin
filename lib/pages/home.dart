@@ -28,6 +28,7 @@ import '../tabs/dashboard/dashboard.dart';
 import '../tabs/featured_categories.dart';
 import '../tabs/notifications/notifications.dart';
 import '../tabs/quizzes.dart';
+import '../tabs/tests.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -51,6 +52,7 @@ class _HomePageState extends ConsumerState<HomePage> {
     const AdSettings(),
     const Settings(),
     const LicenseTab(),
+    const Tests(),
   ];
 
   @override
@@ -58,7 +60,7 @@ class _HomePageState extends ConsumerState<HomePage> {
     super.initState();
     Future.delayed(Duration.zero).then((value) {
       ref.read(categoriesProvider.notifier).getCategories();
-      if(!mounted) return;
+      if (!mounted) return;
       context.read<SettingsBloc>().getSettingsData();
       context.read<AdsBloc>().getAdsData();
     });
@@ -136,7 +138,10 @@ class _AppBar extends ConsumerWidget {
       toolbarTextStyle: TextStyle(color: Colors.grey.shade900, fontSize: 16),
       title: Text(
         '${Config.appName} - Admin Panel ',
-        style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w600, fontSize: 18),
+        style: Theme.of(context)
+            .textTheme
+            .titleLarge
+            ?.copyWith(fontWeight: FontWeight.w600, fontSize: 18),
       ),
       leading: _buildMenuButton(context),
       actions: [
@@ -161,7 +166,10 @@ class _AppBar extends ConsumerWidget {
                   ),
                   Text(
                     userRoleText,
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w500),
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodySmall
+                        ?.copyWith(fontWeight: FontWeight.w500),
                   ),
                 ],
               ),
@@ -185,7 +193,8 @@ class _AppBar extends ConsumerWidget {
           },
           onSelected: (value) async {
             if (value == 'password') {
-              CustomDialogs.openResponsiveDialog(context, widget: const ChangePassword());
+              CustomDialogs.openResponsiveDialog(context,
+                  widget: const ChangePassword());
             } else if (value == 'logout') {
               await AuthService().adminLogout();
               ref.invalidate(userDataProvider);
@@ -211,7 +220,10 @@ class _AppBar extends ConsumerWidget {
             scaffoldKey.currentState!.openDrawer();
           }
         },
-        icon: Icon(Icons.menu, color: Colors.grey.shade900,),
+        icon: Icon(
+          Icons.menu,
+          color: Colors.grey.shade900,
+        ),
       ),
     );
   }

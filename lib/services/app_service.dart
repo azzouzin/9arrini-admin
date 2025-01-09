@@ -9,87 +9,96 @@ import '../utils/toast.dart';
 // ignore: depend_on_referenced_packages
 import 'package:html/parser.dart';
 
-class AppService{
-  static int getCrossAxisCount (context){
-    if(Responsive.isDesktop(context)){
+class AppService {
+  static int getCrossAxisCount(context) {
+    if (Responsive.isDesktop(context)) {
       return 4;
-    }else if(Responsive.isMobile(context)){
+    } else if (Responsive.isMobile(context)) {
       return 1;
-    }else{
+    } else {
       return 3;
     }
   }
 
-  static double getChildAspectRatio (context){
-    if(Responsive.isDesktop(context)){
+  static double getChildAspectRatio(context) {
+    if (Responsive.isDesktop(context)) {
       return 2.3;
-    }else if(Responsive.isMobile(context)){
+    } else if (Responsive.isMobile(context)) {
       return 2.9;
-    }else{
+    } else {
       return 2.0;
     }
   }
 
-  static String getQuestionOrder(String? questionOrderString){
-    if(questionOrderString == null || questionOrderString == Constants.questionOrders[1]){
+  static String getQuestionOrder(String? questionOrderString) {
+    if (questionOrderString == null ||
+        questionOrderString == Constants.questionOrders[1]) {
       return 'ascending';
-    }else if (questionOrderString == Constants.questionOrders[2]){
+    } else if (questionOrderString == Constants.questionOrders[2]) {
       return 'descending';
-    }else{
+    } else {
       return 'random';
     }
   }
 
-  static String setQuestionOrderString(String? questionOrder){
-    if(questionOrder == null || questionOrder == 'ascending'){
+  static String setQuestionOrderString(String? questionOrder) {
+    if (questionOrder == null || questionOrder == 'ascending') {
       return Constants.questionOrders[1];
-    }else if (questionOrder == 'descending'){
+    } else if (questionOrder == 'descending') {
       return Constants.questionOrders[2];
-    }else{
+    } else {
       return Constants.questionOrders[0];
     }
   }
 
-  static String getQuizOrder(String? quizOrderString){
-    if(quizOrderString == null || quizOrderString == Constants.quizOrders[1]){
+  static String getQuizOrder(String? quizOrderString) {
+    if (quizOrderString == null || quizOrderString == Constants.quizOrders[1]) {
       return 'count';
-    }else if (quizOrderString == Constants.quizOrders[2]){
+    } else if (quizOrderString == Constants.quizOrders[2]) {
       return 'descending';
-    }else if (quizOrderString == Constants.quizOrders[3]){
+    } else if (quizOrderString == Constants.quizOrders[3]) {
       return 'ascending';
-    }else{
+    } else {
       return 'random';
     }
   }
 
-  static String setQuizOrderString(String? quizOrder){
-    if(quizOrder == null || quizOrder == 'count'){
+  static String setQuizOrderString(String? quizOrder) {
+    if (quizOrder == null || quizOrder == 'count') {
       return Constants.quizOrders[1];
-    }else if (quizOrder == 'descending'){
+    } else if (quizOrder == 'descending') {
       return Constants.quizOrders[2];
-    }else if(quizOrder == 'ascending'){
+    } else if (quizOrder == 'ascending') {
       return Constants.quizOrders[3];
-    }else{
+    } else {
       return Constants.quizOrders[0];
     }
   }
 
   Future<XFile?> pickImage() async {
     final ImagePicker picker = ImagePicker();
-    XFile? image = await picker.pickImage(source: ImageSource.gallery, maxHeight: 600, maxWidth: 1000);
+    XFile? image = await picker.pickImage(
+        source: ImageSource.gallery, maxHeight: 600, maxWidth: 1000);
     return image;
   }
 
   Future<FilePickerResult?> pickAudio() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
-      allowMultiple: false,
-      allowedExtensions: ['mp3', 'wav'],
-      type: FileType.custom
-    );
+        allowMultiple: false,
+        allowedExtensions: ['mp3', 'wav'],
+        type: FileType.custom);
     return result;
   }
 
-  static bool isURLValid (String url){
+  Future<FilePickerResult?> pdfPicker() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+        allowMultiple: false,
+        allowedExtensions: ['pdf'],
+        type: FileType.custom);
+    return result;
+  }
+
+  static bool isURLValid(String url) {
     return Uri.parse(url).isAbsolute;
   }
 
@@ -104,10 +113,9 @@ class AppService{
 
   Future<FilePickerResult?> pickCSVFile() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
-      allowMultiple: false,
-      allowedExtensions: ['csv'],
-      type: FileType.custom
-    );
+        allowMultiple: false,
+        allowedExtensions: ['csv'],
+        type: FileType.custom);
     return result;
   }
 
@@ -119,5 +127,4 @@ class AppService{
     var format = DateFormat('dd MMMM, yyyy hh:mm a');
     return format.format(dateTime ?? DateTime.now());
   }
-  
 }

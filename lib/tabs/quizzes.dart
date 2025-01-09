@@ -100,11 +100,13 @@ class _QuizzesState extends ConsumerState<Quizzes> {
         ),
         label: Visibility(
           visible: !Responsive.isMobile(context),
-          child: Text("Add Quiz",
-              style: Theme.of(context)
-                  .textTheme
-                  .titleMedium
-                  ?.copyWith(color: Colors.white, fontWeight: FontWeight.w500)),
+          child: Text(
+            "Add Quiz",
+            style: Theme.of(context)
+                .textTheme
+                .titleMedium
+                ?.copyWith(color: Colors.white, fontWeight: FontWeight.w500),
+          ),
         ),
         style: buttonStyle(Theme.of(context).primaryColor),
         onPressed: () => CustomDialogs.openResponsiveDialog(

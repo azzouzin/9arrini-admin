@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:line_icons/line_icons.dart';
 
-
 const Map<int, List<dynamic>> itemList = {
   0: ['Dashboard', LineIcons.pieChart],
   1: ['Categories', CupertinoIcons.grid],
@@ -18,6 +17,7 @@ const Map<int, List<dynamic>> itemList = {
   8: ['Ads', CupertinoIcons.money_dollar],
   9: ['Settings', CupertinoIcons.settings],
   10: ['License', LineIcons.key],
+  11: ['Tests', LineIcons.dDBeyond],
 };
 
 class SideMenu extends StatelessWidget {
@@ -106,7 +106,9 @@ class DrawerListTile extends ConsumerWidget {
         ),
         title: Text(
           title,
-          style: TextStyle(color: selected ? Theme.of(context).primaryColor : Colors.white, fontWeight: FontWeight.w400),
+          style: TextStyle(
+              color: selected ? Theme.of(context).primaryColor : Colors.white,
+              fontWeight: FontWeight.w400),
         ),
       ),
     );
