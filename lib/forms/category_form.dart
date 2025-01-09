@@ -10,7 +10,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 import 'package:rounded_loading_button_plus/rounded_loading_button.dart';
+import '../blocs/years_bloc.dart';
+import '../components/year_dropdown.dart';
 import '../models/category.dart';
 import '../services/firebase_service.dart';
 
@@ -49,7 +52,10 @@ class _CategoryFormState extends ConsumerState<CategoryForm> {
         _btnCtlr.start();
         if (_selectedImage != null) {
           //local image
-          await FirebaseService().uploadImageToFirebaseHosting(_selectedImage!, 'category_thumbnails').then((String? imgUrl) async {
+          await FirebaseService()
+              .uploadImageToFirebaseHosting(
+                  _selectedImage!, 'category_thumbnails')
+              .then((String? imgUrl) async {
             if (imgUrl != null) {
               setState(() => thumbnailUrlCtlr.text = imgUrl);
               _uploadProcedures();
@@ -85,9 +91,12 @@ class _CategoryFormState extends ConsumerState<CategoryForm> {
   }
 
   Future uploadCategory() async {
-    String docId = widget.category == null ? firestore.collection(collectionName).doc().id : widget.category!.id!;
+    String docId = widget.category == null
+        ? firestore.collection(collectionName).doc().id
+        : widget.category!.id!;
     int quizCount = widget.category == null ? 0 : widget.category!.quizCount!;
-    int orderIndex = widget.category == null ? 0 : widget.category?.orderIndex ?? 0;
+    int orderIndex =
+        widget.category == null ? 0 : widget.category?.orderIndex ?? 0;
 
     Category d = Category(
       id: docId,
@@ -95,16 +104,23 @@ class _CategoryFormState extends ConsumerState<CategoryForm> {
       thumbnailUrl: thumbnailUrlCtlr.text,
       quizCount: quizCount,
       orderIndex: orderIndex,
+      year: context.read<YearsBloc>().selctedYear,
     );
     Map<String, dynamic> data = Category.getMap(d);
 
-    await firestore.collection(collectionName).doc(docId).set(data, SetOptions(merge: true));
+    await firestore
+        .collection(collectionName)
+        .doc(docId)
+        .set(data, SetOptions(merge: true));
   }
 
   @override
   void initState() {
-    _submitBtnText = widget.category == null ? 'Upload Category' : 'Update Category';
-    _dialogText = widget.category == null ? 'Uploaded Successfully!' : 'Updated Successfully!';
+    _submitBtnText =
+        widget.category == null ? 'Upload Category' : 'Update Category';
+    _dialogText = widget.category == null
+        ? 'Uploaded Successfully!'
+        : 'Updated Successfully!';
     if (widget.category != null) {
       nameCtlr.text = widget.category!.name!;
       thumbnailUrlCtlr.text = widget.category!.thumbnailUrl!;
@@ -142,17 +158,25 @@ class _CategoryFormState extends ConsumerState<CategoryForm> {
               const SizedBox(
                 height: 40,
               ),
+              YearDropdown(onChanged: (int? value) {}),
+              const SizedBox(
+                height: 30,
+              ),
               Padding(
                 padding: const EdgeInsets.only(bottom: 5),
                 child: Text(
                   'Category Name',
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w600),
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodySmall
+                      ?.copyWith(fontWeight: FontWeight.w600),
                 ),
               ),
               TextFormField(
                   controller: nameCtlr,
                   decoration: InputDecoration(
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10)),
                       hintText: 'Enter Category Name',
                       suffixIcon: IconButton(
                         icon: const Icon(Icons.close),
@@ -169,7 +193,10 @@ class _CategoryFormState extends ConsumerState<CategoryForm> {
                 padding: const EdgeInsets.only(bottom: 5),
                 child: Text(
                   'Category Thumbnail Image',
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w600),
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodySmall
+                      ?.copyWith(fontWeight: FontWeight.w600),
                 ),
               ),
               Row(

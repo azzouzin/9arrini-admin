@@ -7,6 +7,7 @@ class Category {
   int? quizCount;
   bool? featured;
   int? orderIndex;
+  int? year;
 
   Category({
     required this.name,
@@ -15,17 +16,19 @@ class Category {
     this.quizCount,
     this.featured,
     this.orderIndex,
+    this.year,
   });
 
   factory Category.fromFirestore(DocumentSnapshot snap) {
     Map d = snap.data() as Map<dynamic, dynamic>;
     return Category(
-        name: d['name'],
-        id: d['id'],
-        thumbnailUrl: d['image_url'],
-        quizCount: d['quiz_count'],
-        featured: d['featured'] ?? false,
-        orderIndex: d['index'] ?? 0,
+      name: d['name'],
+      id: d['id'],
+      thumbnailUrl: d['image_url'],
+      quizCount: d['quiz_count'],
+      featured: d['featured'] ?? false,
+      orderIndex: d['index'] ?? 0,
+      year: d['year'] ?? 0,
     );
   }
 
@@ -37,6 +40,7 @@ class Category {
       'quiz_count': d.quizCount,
       'featured': d.featured,
       'index': d.orderIndex,
+      'year': d.year,
     };
   }
 }

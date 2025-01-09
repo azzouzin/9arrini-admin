@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
 
 class Test {
   String? id;
@@ -21,9 +22,17 @@ class Test {
 
   factory Test.fromFirestore(DocumentSnapshot snap) {
     Map d = snap.data() as Map<dynamic, dynamic>;
+    int milliseconds = (d['created_at'].nanoseconds / 1000000).round();
+
+    // Create DateTime object
+    DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(
+        (d['created_at'].seconds * 1000) + milliseconds);
+
+    // Format the date (optional)
+    String formattedDate = DateFormat('yyyy-MM-dd HH:mm:ss').format(dateTime);
     return Test(
       id: d['id'],
-      createdAt: d['created_at'],
+      createdAt: formattedDate,
       updatedAt: d['updated_at'],
       name: d['name'],
       link: d['link'],

@@ -20,13 +20,12 @@ import 'package:rounded_loading_button_plus/rounded_loading_button.dart';
 
 import '../../blocs/years_bloc.dart';
 import '../../components/year_dropdown.dart';
-import '../../models/Test.dart';
-import '../../models/question.dart';
+import '../../models/test.dart';
 
 class TestForm extends ConsumerStatefulWidget {
   const TestForm({Key? key, required this.q}) : super(key: key);
 
-  final Question? q;
+  final Test? q;
 
   @override
   ConsumerState<TestForm> createState() => _TestFormState();
@@ -236,7 +235,6 @@ class _TestFormState extends ConsumerState<TestForm> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Select Year'),
               YearDropdown(
                 onChanged: (value) {
                   print(value);

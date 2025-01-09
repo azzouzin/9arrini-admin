@@ -162,15 +162,28 @@ class CustomCacheImageWithDarkFilterBottom extends StatelessWidget {
           SizedBox(
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
-            child: CachedNetworkImage(
-              imageUrl: imageUrl!,
-              fit: BoxFit.cover,
-              height: MediaQuery.of(context).size.height,
-              placeholder: (context, url) => Container(color: Colors.grey[300]),
-              errorWidget: (context, url, error) => Container(
-                color: Colors.grey[300],
-                child: const Icon(Icons.error),
+            child: ImageNetwork(
+              image: imageUrl!,
+              height: 300,
+              width: 500,
+              duration: 1500,
+              curve: Curves.easeIn,
+              onPointer: true,
+              debugPrint: false,
+              backgroundColor: Colors.blue,
+              fitAndroidIos: BoxFit.cover,
+              fitWeb: BoxFitWeb.contain,
+              // borderRadius: BorderRadius.circular(70),
+              onLoading: const CircularProgressIndicator(
+                color: Colors.indigoAccent,
               ),
+              onError: const Icon(
+                Icons.error,
+                color: Colors.red,
+              ),
+              onTap: () {
+                debugPrint("©gabriel_patrick_souza");
+              },
             ),
           ),
           Container(
