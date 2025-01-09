@@ -4,7 +4,7 @@ class Test {
   String? id;
   String? name;
   String? link;
-  String? year;
+  int? year;
   // ignore: prefer_typing_uninitialized_variables
   var createdAt;
   // ignore: prefer_typing_uninitialized_variables

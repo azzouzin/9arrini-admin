@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'blocs/ads_bloc.dart';
 import 'blocs/settings_bloc.dart';
+import 'blocs/years_bloc.dart';
 import 'configs/config.dart';
 
 class MyApp extends StatelessWidget {
@@ -15,6 +16,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider<SettingsBloc>(create: (context) => SettingsBloc()),
         ChangeNotifierProvider<AdsBloc>(create: (context) => AdsBloc()),
+        ChangeNotifierProvider<YearsBloc>(create: (context) => YearsBloc()),
       ],
       child: MaterialApp(
           debugShowCheckedModeBanner: false,

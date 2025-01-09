@@ -15,8 +15,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:html_editor_enhanced/html_editor.dart';
 import 'package:logger/web.dart';
+import 'package:provider/provider.dart';
 import 'package:rounded_loading_button_plus/rounded_loading_button.dart';
 
+import '../../blocs/years_bloc.dart';
+import '../../components/year_dropdown.dart';
 import '../../models/Test.dart';
 import '../../models/question.dart';
 
@@ -150,7 +153,7 @@ class _TestFormState extends ConsumerState<TestForm> {
           formKey.currentState!.save();
           _uploadPdfToFirebaseHosting().then((String? pdfUrl) async {
             if (pdfUrl != null) {
-              _uploadProcedures();
+              _uploadProcedures(pdfUrl);
             }
           });
         }
@@ -162,9 +165,9 @@ class _TestFormState extends ConsumerState<TestForm> {
     }
   }
 
-  _uploadProcedures() async {
+  _uploadProcedures(String link) async {
     //  _btnCtlr.start();
-    await uploadTest().then((value) async {
+    await uploadTest(link).then((value) async {
       if (widget.q == null) {
         // await await FirebaseService()
         //     .increaseQuestionCountInQuiz(_selectedQuizId!, null);
@@ -180,7 +183,7 @@ class _TestFormState extends ConsumerState<TestForm> {
     });
   }
 
-  Future uploadTest() async {
+  Future uploadTest(String link) async {
     try {
       final String docId = firestore.collection(collectionName).doc().id;
 
@@ -192,7 +195,8 @@ class _TestFormState extends ConsumerState<TestForm> {
         createdAt: createdAt,
         updatedAt: updatedAt,
         name: questionpdfCtrl.text,
-        link: questionpdfCtrl.text.isEmpty ? null : questionpdfCtrl.text,
+        link: link,
+        year: context.read<YearsBloc>().selctedYear,
       );
 
       Map<String, dynamic> data = Test.getMap(q);
@@ -232,6 +236,13 @@ class _TestFormState extends ConsumerState<TestForm> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Text('Select Year'),
+              YearDropdown(
+                onChanged: (value) {
+                  print(value);
+                },
+              ),
+              const SizedBox(height: 20),
               Row(
                 children: [
                   Expanded(
@@ -264,18 +275,6 @@ class _TestFormState extends ConsumerState<TestForm> {
                 ],
               ),
               const SizedBox(height: 20),
-              TextFormField(
-                controller: questionTitleCtlr,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(3)),
-                  hintText: 'Enter Test Title',
-                  suffixIcon: IconButton(
-                    icon: const Icon(Icons.close),
-                    onPressed: () => questionTitleCtlr.clear(),
-                  ),
-                ),
-              ),
               QuestionAudio(
                 questionType: _questionType,
                 imageCtrl: questionAudioCtrl,
