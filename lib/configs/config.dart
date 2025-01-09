@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 
 class Config {
-
   //Your App Name
-  static const String appName = 'QuizHour';
+  static const String appName = '9arrini';
 
   //Primary Color of the Admin Panel
-  static const primaryColor = Color(0xff5f54d8);
+  static const primaryColor = Color.fromARGB(255, 216, 84, 84);
   static const secondaryColor = Color.fromARGB(255, 255, 255, 255);
   static const bgColor = Color.fromARGB(255, 251, 245, 245);
 
@@ -16,10 +15,12 @@ class Config {
   //Your Logo
   static const String logo = "assets/images/logo.png";
 
-  static const String testingDialog = "Modification is disabled in testing mode!";
+  static const String testingDialog =
+      "Modification is disabled in testing mode!";
 
   //default user avatar
-  static const String defaultAvatarString = 'assets/images/user_avatars/user1.png';
+  static const String defaultAvatarString =
+      'assets/images/user_avatars/user1.png';
 
   //User Avatar List (from the app)
   static const List<String> userAvatars = [
@@ -41,8 +42,4 @@ class Config {
     'assets/images/user_avatars/user16.png',
     'assets/images/user_avatars/user17.png'
   ];
-  
-
-
-
 }

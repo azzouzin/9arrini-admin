@@ -29,7 +29,8 @@ class LicenseTab extends ConsumerWidget {
       children: [
         Container(
           padding: const EdgeInsets.all(100),
-          decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(15)),
+          decoration: BoxDecoration(
+              color: Colors.white, borderRadius: BorderRadius.circular(15)),
           child: Column(
             children: [
               Icon(
@@ -40,27 +41,38 @@ class LicenseTab extends ConsumerWidget {
               const SizedBox(height: 30),
               Text(
                 'Your license key is valid and activated',
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.blueGrey),
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyMedium
+                    ?.copyWith(color: Colors.blueGrey),
               ),
               const SizedBox(height: 10),
               RichText(
                 text: TextSpan(
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyMedium
+                        ?.copyWith(fontWeight: FontWeight.w600),
                     text: 'License Type:  ',
-                    children: [TextSpan(text: licenseString, style: const TextStyle(color: Colors.green, fontWeight: FontWeight.w600))]),
+                    children: [
+                      TextSpan(
+                          text: licenseString,
+                          style: const TextStyle(
+                              color: Colors.green, fontWeight: FontWeight.w600))
+                    ]),
               )
             ],
           ),
         ),
         const SizedBox(height: 30),
-        RichText(
-          text: TextSpan(style: Theme.of(context).textTheme.bodyMedium, text: 'Want to deactivate this license?  ', children: [
-            TextSpan(
-                style: const TextStyle(color: Colors.blueAccent),
-                text: 'Click here',
-                recognizer: TapGestureRecognizer()..onTap = () => _handleDeactivateLicense(context, ref))
-          ]),
-        )
+        // RichText(
+        //   text: TextSpan(style: Theme.of(context).textTheme.bodyMedium, text: 'Want to deactivate this license?  ', children: [
+        //     TextSpan(
+        //         style: const TextStyle(color: Colors.blueAccent),
+        //         text: 'Click here',
+        //         recognizer: TapGestureRecognizer()..onTap = () => _handleDeactivateLicense(context, ref))
+        //   ]),
+        // )
       ],
     );
   }

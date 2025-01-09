@@ -42,13 +42,14 @@ class SideMenu extends StatelessWidget {
               margin: const EdgeInsets.all(10),
               height: 130,
               child: Center(
-                child: Text(
-                  Config.appName,
-                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w600,
-                      ),
-                ),
+                child: Image.asset(Config.logo, height: 50, width: 300),
+                // Text(
+                //   Config.appName,
+                //   style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                //         color: Colors.white,
+                //         fontWeight: FontWeight.w600,
+                //       ),
+                // ),
               ),
             ),
             ListView.builder(
