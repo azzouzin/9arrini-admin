@@ -146,6 +146,8 @@ class _TestFormState extends ConsumerState<TestForm> {
   }
 
   void _handleSubmit() async {
+    _btnCtlr.start();
+
     if (hasAccess(ref)) {
       if (_selectedCategoryId != null) {
         if (_pdfAudioByte != null) {
@@ -165,7 +167,6 @@ class _TestFormState extends ConsumerState<TestForm> {
   }
 
   _uploadProcedures(String link) async {
-    //  _btnCtlr.start();
     await uploadTest(link).then((value) async {
       if (widget.q == null) {
         // await await FirebaseService()

@@ -230,7 +230,7 @@ class _QuizFormState extends ConsumerState<QuizForm> {
                         Padding(
                           padding: const EdgeInsets.only(bottom: 5),
                           child: Text(
-                            'Quiz Name',
+                            'Unit Name',
                             style: Theme.of(context).textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w600),
                           ),
                         ),
@@ -238,7 +238,7 @@ class _QuizFormState extends ConsumerState<QuizForm> {
                             controller: nameCtlr,
                             decoration: InputDecoration(
                                 border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-                                hintText: 'Enter Quiz Title',
+                                hintText: 'Enter Unit Title',
                                 suffixIcon: IconButton(
                                   icon: const Icon(Icons.close),
                                   onPressed: () => nameCtlr.clear(),
@@ -264,7 +264,7 @@ class _QuizFormState extends ConsumerState<QuizForm> {
                         Padding(
                           padding: const EdgeInsets.only(bottom: 5),
                           child: Text(
-                            'Quiz Thumbnail Image',
+                            'Unit Thumbnail Image',
                             style: Theme.of(context).textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w600),
                           ),
                         ),
@@ -291,7 +291,7 @@ class _QuizFormState extends ConsumerState<QuizForm> {
                         Padding(
                           padding: const EdgeInsets.only(bottom: 5),
                           child: Text(
-                            'Points Required To Play This Quiz',
+                            'Points Required To Play This Unit',
                             style: Theme.of(context).textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w600),
                           ),
                         ),
@@ -324,7 +324,7 @@ class _QuizFormState extends ConsumerState<QuizForm> {
               Padding(
                 padding: const EdgeInsets.only(bottom: 5),
                 child: Text(
-                  'Question Order',
+                  'Unit Order',
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w600),
                 ),
               ),
@@ -339,7 +339,7 @@ class _QuizFormState extends ConsumerState<QuizForm> {
               Padding(
                 padding: const EdgeInsets.only(bottom: 5),
                 child: Text(
-                  'Enter Quiz Description',
+                  'Enter Unit Description',
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w600),
                 ),
               ),
@@ -412,7 +412,7 @@ class _QuizFormState extends ConsumerState<QuizForm> {
                 Padding(
                   padding: const EdgeInsets.only(bottom: 5),
                   child: Text(
-                    'Timer In Minutes Per Complete Quiz',
+                    'Timer In Minutes Per Complete Unit',
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w600),
                   ),
                 ),

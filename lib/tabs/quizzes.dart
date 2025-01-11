@@ -40,7 +40,7 @@ class _QuizzesState extends ConsumerState<Quizzes> {
 
   final List<DataColumn> _columns = [
     const DataColumn(label: Text('Thumbnail')),
-    const DataColumn(label: Text('Quiz Name')),
+    const DataColumn(label: Text('Unit Name')),
     const DataColumn(label: Text('Questions Amount')),
     const DataColumn(label: Text('Category')),
     const DataColumn(label: Text('Actions')),
@@ -62,12 +62,12 @@ class _QuizzesState extends ConsumerState<Quizzes> {
               child: PaginatedDataTable2(
                 rowsPerPage: _itemPerPage - 1,
                 source: source,
-                header: Text('All Quizzes',
+                header: Text('All Units',
                     style: Theme.of(context)
                         .textTheme
                         .headlineSmall
                         ?.copyWith(fontWeight: FontWeight.w600)),
-                empty: const Center(child: Text('No Quizzes Found')),
+                empty: const Center(child: Text('No Units Found')),
                 minWidth: 600,
                 wrapInCard: false,
                 horizontalMargin: 20,
@@ -101,7 +101,7 @@ class _QuizzesState extends ConsumerState<Quizzes> {
         label: Visibility(
           visible: !Responsive.isMobile(context),
           child: Text(
-            "Add Quiz",
+            "Add Unit",
             style: Theme.of(context)
                 .textTheme
                 .titleMedium
