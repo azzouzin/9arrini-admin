@@ -5,6 +5,7 @@ class Test {
   String? id;
   String? name;
   String? link;
+  String? chapterID;
   int? year;
   // ignore: prefer_typing_uninitialized_variables
   var createdAt;
@@ -17,6 +18,7 @@ class Test {
     this.updatedAt,
     this.name,
     this.link,
+    this.chapterID,
     this.year,
   });
 
@@ -37,6 +39,7 @@ class Test {
       name: d['name'],
       link: d['link'],
       year: d['year'],
+      chapterID: d['chapterID'],
     );
   }
 
@@ -47,6 +50,7 @@ class Test {
       'updated_at': test.updatedAt,
       'name': test.name,
       'link': test.link,
+      'chapterID': test.chapterID,
       'year': test.year,
     };
   }

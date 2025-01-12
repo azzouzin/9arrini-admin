@@ -196,6 +196,7 @@ class _TestFormState extends ConsumerState<TestForm> {
         updatedAt: updatedAt,
         name: questionpdfCtrl.text,
         link: link,
+        chapterID: _selectedCategoryId,
         year: context.read<YearsBloc>().selctedYear,
       );
 
