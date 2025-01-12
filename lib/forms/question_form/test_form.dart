@@ -85,6 +85,8 @@ class _TestFormState extends ConsumerState<TestForm> {
   }
 
   Future<String?> _uploadPdfToFirebaseHosting() async {
+    _btnCtlr.start();
+
     String? pdfUrl;
     final Reference storageReference = FirebaseStorage.instance
         .ref()
@@ -146,8 +148,6 @@ class _TestFormState extends ConsumerState<TestForm> {
   }
 
   void _handleSubmit() async {
-    _btnCtlr.start();
-
     if (hasAccess(ref)) {
       if (_selectedCategoryId != null) {
         if (_pdfAudioByte != null) {

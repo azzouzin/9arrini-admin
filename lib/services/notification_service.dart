@@ -7,10 +7,11 @@ import '../models/notification.dart';
 import 'package:googleapis_auth/auth_io.dart';
 
 class NotificationService {
-  Future sendCustomNotificationByTopic(NotificationModel notification, String topic) async {
+  Future sendCustomNotificationByTopic(
+      NotificationModel notification, String topic) async {
     final String accessToken = await _getAccessToken();
     final String body = AppService.getNormalText(notification.body);
-    final String projectId = serviceCreds['project_id'];
+    final String projectId = serviceCreds['project_id']!;
 
     var notificationBody = {
       "message": {
@@ -31,7 +32,8 @@ class NotificationService {
 
     try {
       final response = await http.post(
-        Uri.parse('https://fcm.googleapis.com/v1/projects/$projectId/messages:send'),
+        Uri.parse(
+            'https://fcm.googleapis.com/v1/projects/$projectId/messages:send'),
         headers: <String, String>{
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $accessToken',
@@ -53,7 +55,8 @@ class NotificationService {
 
     final scopes = ['https://www.googleapis.com/auth/firebase.messaging'];
 
-    final authClient = await clientViaServiceAccount(accountCredentials, scopes);
+    final authClient =
+        await clientViaServiceAccount(accountCredentials, scopes);
 
     final credentials = authClient.credentials;
     return credentials.accessToken.data;
