@@ -127,6 +127,10 @@ class TestDataSource extends DataTableSource {
         testList[index].createdAt.toString(),
         style: defaultTextStyle(context),
       )),
+       DataCell(Text(
+        testList[index].chapterName.toString(),
+        style: defaultTextStyle(context),
+      )),
       // DataCell(
       //   FutureBuilder(
       //     future: FirebaseService().getCategoryName(testList[index].name!),

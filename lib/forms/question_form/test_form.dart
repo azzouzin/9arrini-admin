@@ -21,6 +21,7 @@ import 'package:rounded_loading_button_plus/rounded_loading_button.dart';
 import '../../blocs/years_bloc.dart';
 import '../../components/year_dropdown.dart';
 import '../../models/test.dart';
+import '../../providers/categories_provider.dart';
 
 class TestForm extends ConsumerStatefulWidget {
   const TestForm({Key? key, required this.q}) : super(key: key);
@@ -185,11 +186,12 @@ class _TestFormState extends ConsumerState<TestForm> {
 
   Future uploadTest(String link) async {
     try {
+      final categories = ref.watch(categoriesProvider);
+
       final String docId = firestore.collection(collectionName).doc().id;
 
       var createdAt = widget.q == null ? DateTime.now() : widget.q!.createdAt;
       var updatedAt = widget.q == null ? null : DateTime.now();
-      Logger().i('Uploading Test');
       Test q = Test(
         id: docId,
         createdAt: createdAt,
@@ -197,6 +199,10 @@ class _TestFormState extends ConsumerState<TestForm> {
         name: questionpdfCtrl.text,
         link: link,
         chapterID: _selectedCategoryId,
+        chapterName: categories
+            .where((element) => element.id == _selectedCategoryId)
+            .first
+            .name,
         year: context.read<YearsBloc>().selctedYear,
       );
 

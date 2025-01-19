@@ -49,6 +49,9 @@ class _TestsState extends ConsumerState<Tests> {
       label: Text('Created At'),
     ),
     const DataColumn(
+      label: Text('Chapter Name'),
+    ),
+    const DataColumn(
       label: Text('Actions'),
     ),
   ];
